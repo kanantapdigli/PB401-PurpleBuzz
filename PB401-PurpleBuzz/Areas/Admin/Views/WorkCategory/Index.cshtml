@@ -1,0 +1,35 @@
+﻿@using PB401_PurpleBuzz.Areas.Admin.Models.WorkCategory
+@model WorkCategoryIndexVM
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Work Categories</h1>
+    <a class="btn btn-primary" asp-action="create" asp-controller="workcategory">Create</a>
+</div>
+
+<table class="table table-light">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Modified at</th>
+            <th scope="col" class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var workCategory in Model.WorkCategories)
+        {
+            <tr>
+                <td>@workCategory.Name</td>
+                <td>@workCategory.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@workCategory.ModifiedAt?.ToString("dd/MM/yyyy HH:mm")</td>
+                <td class="text-center d-flex justify-content-center">
+                    <a class="btn btn-secondary mx-2" asp-action="update" asp-controller="workcategory" asp-route-id="@workCategory.Id">Update</a>
+                    <form method="post" asp-action="delete" asp-controller="workcategory" asp-route-id="@workCategory.Id">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
